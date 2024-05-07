@@ -1,13 +1,9 @@
-function lengthOfLongestSubstring(s) {
+function groupAnagrams(strs) {
   const map = new Map();
-  let maxLength = 0;
-  let left = 0;
-  for (let right = 0; right < s.length; right++) {
-    if (map.has(s[right])) {
-      left = Math.max(left, map.get(s[right]) + 1);
-    }
-    map.set(s[right], right);
-    maxLength = Math.max(maxLength, right - left + 1);
+  for (const str of strs) {
+    const sortedStr = str.split("").sort().join("");
+    if (!map.has(sortedStr)) map.set(sortedStr, []);
+    map.get(sortedStr).push(str);
   }
-  return maxLength;
+  return [...map.values()];
 }
